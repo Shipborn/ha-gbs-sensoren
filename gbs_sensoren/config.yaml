@@ -1,0 +1,23 @@
+name: GBS Sensoren
+version: "1.0.0"
+slug: gbs_sensoren
+description: "Dashboard en locatiekeuze voor 4 SONOFF IP65-sondes en 5 AirGuard TH-sensoren"
+url: "https://github.com/Shipborn/ha-gbs-sensoren"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+init: false
+startup: application
+boot: auto
+hassio_api: true
+hassio_role: homeassistant
+map:
+  - type: homeassistant_config
+    read_only: false
+options:
+  auto_restart: true
+  fotos_overschrijven: false
+schema:
+  auto_restart: bool
+  fotos_overschrijven: bool

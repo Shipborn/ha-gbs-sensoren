@@ -1,7 +1,8 @@
 import os, re, sys
 from PIL import Image, ImageDraw, ImageFont
 
-OUT = sys.argv[1]
+HIER = os.path.dirname(os.path.abspath(__file__))
+OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HIER, "..", "gbs_sensoren", "bestanden")
 
 LOCATIES = [
     "Niet geplaatst",
@@ -43,10 +44,20 @@ p.append("""# ==================================================================
 #    sensor.gbs_a1_temperature, sensor.gbs_a1_humidity,
 #    sensor.gbs_a1_pressure,    sensor.gbs_a1_battery
 #
-#  Locaties aanpassen? Wijzig de lijst hieronder (alle 9 + de
-#  'locatie_opties' anchor) EN de tegels in het dashboard, en zet een
-#  foto in /config/www/sensorlocaties/<locatie_als_slug>.jpg
+#  Dit bestand wordt gemaakt door tools/genereer.py en neergezet door
+#  de app "GBS Sensoren". Niet in HA zelf wijzigen: een update van de
+#  app overschrijft het.
 # =====================================================================
+
+# Het dashboard in de zijbalk (bestand wordt door de app neergezet)
+lovelace:
+  dashboards:
+    gbs-sensoren:
+      mode: yaml
+      title: GBS Sensoren
+      icon: mdi:thermometer-lines
+      show_in_sidebar: true
+      filename: dashboards/gbs_sensoren.yaml
 
 input_select:
   gbs_actieve_sensor:
@@ -133,7 +144,7 @@ open(f"{OUT}/packages/gbs_sensoren.yaml", "w").write("".join(p))
 d = []
 d.append("""# =====================================================================
 #  GBS sensoren – dashboard (YAML-modus)
-#  Registratie in configuration.yaml: zie configuration.yaml (lovelace: dashboards:)
+#  Aangemeld via 'lovelace:' in packages/gbs_sensoren.yaml
 # =====================================================================
 title: GBS Sensoren
 views:

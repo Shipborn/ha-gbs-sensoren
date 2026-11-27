@@ -1,6 +1,6 @@
 # =====================================================================
 #  GBS sensoren – dashboard (YAML-modus)
-#  Registratie in configuration.yaml: zie configuration.yaml (lovelace: dashboards:)
+#  Aangemeld via 'lovelace:' in packages/gbs_sensoren.yaml
 # =====================================================================
 title: GBS Sensoren
 views:
