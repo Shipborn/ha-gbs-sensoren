@@ -9,7 +9,6 @@ arch:
   - armv7
 init: false
 ingress: true
-ingress_port: 8099
 panel_icon: mdi:map-marker-multiple
 panel_title: GBS Locaties
 homeassistant_api: true
