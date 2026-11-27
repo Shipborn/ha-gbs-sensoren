@@ -1,0 +1,17 @@
+# Deze repo wordt in /config van Home Assistant uitgecheckt.
+# Alles negeren, behalve de bestanden die we bewust beheren.
+# (Zo komen secrets, database, .storage, logs en backups nooit in git.)
+/*
+!/.gitignore
+!/.github/
+!/README.md
+!/configuration.yaml
+!/packages/
+!/dashboards/
+!/tools/
+!/www/
+/www/*
+!/www/sensorlocaties/
+secrets.yaml
+.DS_Store
+__pycache__/
