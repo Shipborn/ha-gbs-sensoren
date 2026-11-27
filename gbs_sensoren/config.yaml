@@ -8,8 +8,6 @@ arch:
   - amd64
   - armv7
 init: false
-startup: application
-boot: auto
 hassio_api: true
 hassio_role: homeassistant
 map:
