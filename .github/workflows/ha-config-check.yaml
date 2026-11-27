@@ -19,11 +19,11 @@ jobs:
           echo "{}" > scripts.yaml
           echo "[]" > scenes.yaml
           mkdir -p themes
-          touch secrets.yaml
+          echo "{}" > "$RUNNER_TEMP/fake_secrets.yaml"
 
       - name: Home Assistant configuratie controleren
         uses: frenck/action-home-assistant@v1
         with:
           path: "."
-          secrets: secrets.yaml
+          secrets: ${{ runner.temp }}/fake_secrets.yaml
           version: stable
