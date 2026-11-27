@@ -1,5 +1,5 @@
 # Bij elke push: app-manifest controleren, de app-installatie nadoen op een
-# lege HA-config en die config laten controleren door Home Assistant zelf.
+# verse HA-config (ook met lastige locatienamen) en die laten controleren door HA zelf.
 name: Controle
 
 on:
@@ -29,10 +29,13 @@ jobs:
           echo "{}" > test-config/scripts.yaml
           echo "[]" > test-config/scenes.yaml
           mkdir -p test-config/themes
-          echo '{"auto_restart": false, "fotos_overschrijven": false}' > "$RUNNER_TEMP/opties.json"
-          cd gbs_sensoren
-          GBS_TEST=1 OPTIES="$RUNNER_TEMP/opties.json" BRON=bestanden APP_YAML=config.yaml \
-            HULP=zet_packages_aan.py CONFIG_DIR="$GITHUB_WORKSPACE/test-config" bash run.sh
+          pip install pillow
+          mkdir -p "$RUNNER_TEMP/data"
+          echo '{"auto_restart": false}' > "$RUNNER_TEMP/data/options.json"
+          # Een extra locatie met lastige tekens, om het quoten te testen
+          echo '["Binnen voorzijde", "Kast \u0027A\u0027 & co", "Café (boven)"]' > "$RUNNER_TEMP/data/locaties.json"
+          cd gbs_sensoren/app
+          CONFIG_DIR="$GITHUB_WORKSPACE/test-config" DATA_DIR="$RUNNER_TEMP/data" python3 main.py --eenmalig
           cat "$GITHUB_WORKSPACE/test-config/configuration.yaml"
           echo "{}" > "$RUNNER_TEMP/fake_secrets.yaml"
 
